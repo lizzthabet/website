@@ -1,9 +1,9 @@
 html, body {
-/*	background: linear-gradient(#EBEBEB,white);
+	background: linear-gradient(#EBEBEB,white);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	background-color: white;*/
-	background-color: #EBEBEB;
+	background-color: white;
+	/*background-color: #EBEBEB;*/
 	font-family: 'Inconsolata', monospace;
 	-webkit-font-smoothing: antialiased;
 }
@@ -99,6 +99,22 @@ li {
 .small {
 	display:block;
 	max-width:250px;
+	width:100%;
+	height:auto;
+	margin:30px 0 10px 0;
+}
+
+.small-250w {
+	display:inline-block;
+	max-width:250px;
+	width:100%;
+	height:auto;
+	margin:30px 0 10px 0;
+}
+
+.small-500w {
+	display:inline-block;
+	max-width:500px;
 	width:100%;
 	height:auto;
 	margin:30px 0 10px 0;
