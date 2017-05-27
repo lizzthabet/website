@@ -1,0 +1,116 @@
+html, body {
+/*	background: linear-gradient(#EBEBEB,white);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-color: white;*/
+	background-color: #EBEBEB;
+	font-family: 'Inconsolata', monospace;
+	-webkit-font-smoothing: antialiased;
+}
+/*
+body {
+	background: linear-gradient(#EBEBEB,white);
+}*/
+
+.mt-60 {
+	margin-top:60px;
+}
+
+.mt-0 {
+	margin-top: 0;
+}
+
+.top {
+	margin-top:130px;
+}
+
+nav.bottom {
+	margin: 20px 0 40px 0;
+}
+
+nav.header {
+	position: fixed;
+	display:block;
+	z-index: 1000;
+}
+
+a {
+	color:blue;
+	text-decoration: underline;
+}
+
+a:hover {
+	color:purple;
+}
+
+a:focus {
+	color:purple;
+}
+
+a.plain {
+	color:inherit;
+	text-decoration: underline;
+}
+
+a.plain:hover {
+	color:inherit;
+	text-decoration: underline;
+}
+
+h1 {
+	font-size: 1.25em;
+	letter-spacing: 0.02em;
+	margin-bottom: 30px;
+	position: relative;
+	display: inline-block;
+}
+
+h2 {
+	font-size:1.10em;
+	letter-spacing: 0.02em;
+	/*font-weight: 700;*/
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+li {
+	margin: 10px 0 10px 0;
+}
+
+.main {
+	margin-left: 8px;
+}
+
+/*IMAGE CLASSES*/
+
+.header-img {
+	width:200px;
+}
+
+.icon {
+	height: 75px;
+	display: inline-block;
+	margin: 0 0 0 10px;
+}
+
+.small {
+	display:block;
+	max-width:250px;
+	width:100%;
+	height:auto;
+	margin:30px 0 10px 0;
+}
+
+.medium {
+	display: inline-block;
+	max-height: 500px;
+	height:100%;
+	width:auto;
+	/*border: 1px solid gray;*/
+	margin: 10px 10px 10px 0;
+}
+/*SET CONTAINER HEIGHT WHAT U WANT THE IMAGE TO BE, THEN LET HEIGHT BE 100% - WOULD BE WIDTH: AUTO SOLUTION?*/
+/*NEED TO DEFINE XS MEDIA QUERY WHERE WIDTH IS SET TO 100%*/
