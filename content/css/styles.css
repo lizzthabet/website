@@ -1,16 +1,14 @@
 html, body {
-	background: linear-gradient(#EBEBEB,white);
+	background: linear-gradient(#E1E1E1,#F2F2F2);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	background-color: white;
+	background-color: #F2F2F2;
 	/*background-color: #EBEBEB;*/
 	font-family: 'Inconsolata', monospace;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 1em;
 }
-/*
-body {
-	background: linear-gradient(#EBEBEB,white);
-}*/
 
 .mt-60 {
 	margin-top:60px;
@@ -21,7 +19,11 @@ body {
 }
 
 .top {
-	margin-top:130px;
+	margin-top:160px;
+}
+
+.nudge {
+	margin-left:-15px;
 }
 
 nav.bottom {
@@ -31,28 +33,19 @@ nav.bottom {
 nav.header {
 	position: fixed;
 	display:block;
-	z-index: 1000;
 }
 
 a {
 	color:blue;
-	text-decoration: underline;
+	text-decoration: none;
 }
 
-a:hover {
+a:hover, a:focus {
 	color:purple;
+	text-decoration: none;
 }
 
-a:focus {
-	color:purple;
-}
-
-a.plain {
-	color:inherit;
-	text-decoration: underline;
-}
-
-a.plain:hover {
+a.plain, a.plain:hover {
 	color:inherit;
 	text-decoration: underline;
 }
@@ -66,9 +59,9 @@ h1 {
 }
 
 h2 {
-	font-size:1.10em;
+	/*color: #7F462C;*/
+	font-size:1.25em;
 	letter-spacing: 0.02em;
-	/*font-weight: 700;*/
 }
 
 ul {
@@ -86,8 +79,13 @@ li {
 
 /*IMAGE CLASSES*/
 
+img {
+	z-index: 100;
+}
+
 .header-img {
 	width:200px;
+	z-index: 1;
 }
 
 .icon {
@@ -125,8 +123,39 @@ li {
 	max-height: 500px;
 	height:100%;
 	width:auto;
-	/*border: 1px solid gray;*/
 	margin: 10px 10px 10px 0;
 }
-/*SET CONTAINER HEIGHT WHAT U WANT THE IMAGE TO BE, THEN LET HEIGHT BE 100% - WOULD BE WIDTH: AUTO SOLUTION?*/
-/*NEED TO DEFINE XS MEDIA QUERY WHERE WIDTH IS SET TO 100%*/
+
+.img-container {
+	margin: 0 0 0 -15px;
+	padding: 15px 0 15px 0;
+}
+
+.img-wrapper {
+	height: 550px;
+	padding: 15px;
+	display:inline-block;
+}
+
+@media (max-width: 768px) { 
+
+	.img-wrapper {
+  		max-width: 600px;
+  		height: auto;
+		padding: 15px;
+		display: inline-block;
+	}
+ }
+
+.img-self {
+	height:100%;
+	width:auto;
+}
+
+@media (max-width: 768px) { 
+
+	.img-self {
+		height:auto;
+		width:100%;
+	}
+ }
