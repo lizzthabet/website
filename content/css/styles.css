@@ -32,8 +32,18 @@ html, body {
 	padding-left: 35px;
 }
 
+.pr-10 {
+	padding-right: 10px;
+}
+
 .nudge {
 	margin-left: -15px;
+}
+
+.fixed-bottom {
+	position: fixed;
+	bottom: 0;
+	right: 0;
 }
 
 /*NAV*/
@@ -49,7 +59,7 @@ html, body {
 }
 
 nav.bottom {
-	margin: 20px 0 40px 0;
+	margin: 60px 0 40px 0;
 }
 
 /*LINKS*/
@@ -64,7 +74,7 @@ a:hover, a:focus {
 	text-decoration: none;
 }
 
-a.plain, a.plain:hover {
+a.plain, a.plain:hover, .plain {
 	color: inherit;
 	text-decoration: underline;
 }
@@ -82,6 +92,17 @@ h1 {
 h2 {
 	font-size:1.25em;
 	letter-spacing: 0.02em;
+}
+
+h3 {
+	font-size: 1.10em;
+	letter-spacing: 0.02em;
+	font-style: italic;
+}
+
+h3.sub-head {
+	margin-top: 0;
+	margin-bottom:30px;
 }
 
 ul {
@@ -105,9 +126,51 @@ hr {
 }
 
 figcaption {
-	font-size: 0.8em;
+	font-size: 0.85em;
 	margin: 10px 5px 5px 0px;
 }
+
+iframe {
+	border: 0;
+	height: 324px;
+	width: 576px;
+}
+
+	@media (max-width: 767px) {
+
+		iframe {
+			height: 309px;
+			width: 550px;
+		}
+
+	}
+
+	@media (min-width: 768px) and (max-width: 991px) {
+
+		iframe {
+			height: 413px;
+			width: 735px;
+		}
+
+	}
+
+	@media (min-width: 992px) and (max-width: 1199px) {
+
+		iframe {
+			width: 980px;
+			height: 551px;
+		}
+		
+	}
+
+	@media (min-width: 1200px) {
+
+		iframe {
+			width: 980px;
+			height: 551px;
+		}
+
+	}
 
 /*IMAGE SIZES*/
 
@@ -146,29 +209,38 @@ figcaption {
 	height: 650px;
 }
 
-@media (max-width: 768px) { 
+	@media (max-width: 767px) { 
 
-	.img-wrapper-sm, .img-wrapper, .img-wrapper-lg {
-  		max-width: 600px;
-  		height: auto;
-		padding: 15px;
-		display: inline-block;
-	}
+		.img-wrapper-sm, .img-wrapper, .img-wrapper-lg {
+	  		max-width: 600px;
+	  		height: auto;
+			padding: 15px;
+			display: inline-block;
+		}
 
-	.img-wrapper-sm {
-		
+		.img-wrapper-sm {
+			
+		}
+	 }
+
+	/*IMAGE SIZING BREAKS AT SM QUERIES WHEN NOT IN CONTAINTER FLUID*/
+	@media (min-width: 768px) and (max-width: 991px) { 
+
+		.img-wrapper.too-long {
+			max-width: ;
+		}
+
 	}
- }
 
 .img-self {
 	height: 100%;
 	width: auto;
 }
 
-@media (max-width: 768px) { 
+	@media (max-width: 768px) { 
 
-	.img-self {
-		height: auto;
-		width: 100%;
-	}
- }
+		.img-self {
+			height: auto;
+			width: 100%;
+		}
+	 }
