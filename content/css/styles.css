@@ -130,13 +130,31 @@ figcaption {
 	margin: 10px 5px 5px 0px;
 }
 
-iframe {
-	border: 0;
-	height: 324px;
-	width: 576px;
+
+/*IFRAME*/
+
+.iframe-container {
+	padding:;
 }
 
-	@media (max-width: 767px) {
+.iframe-wrapper {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+	max-width:  95%;
+}
+
+iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: 0;
+	height: 85%;
+	width: 85%;
+}
+
+	/*@media (max-width: 767px) {
 
 		iframe {
 			height: 309px;
@@ -170,7 +188,7 @@ iframe {
 			height: 551px;
 		}
 
-	}
+	}*/
 
 /*IMAGE SIZES*/
 
@@ -218,16 +236,18 @@ iframe {
 			display: inline-block;
 		}
 
-		.img-wrapper-sm {
-			
-		}
 	 }
 
 	/*IMAGE SIZING BREAKS AT SM QUERIES WHEN NOT IN CONTAINTER FLUID*/
 	@media (min-width: 768px) and (max-width: 991px) { 
 
-		.img-wrapper.too-long {
-			max-width: ;
+		.img-wrapper-sm.too-long {
+			max-width: 786px;
+		}
+
+		.img-self.too-long {
+			height: auto;
+			width: 100%;
 		}
 
 	}
