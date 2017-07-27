@@ -36,6 +36,10 @@ html, body {
 	padding-right: 10px;
 }
 
+.plr-15 {
+	padding: 0 15px 0 15px;
+}
+
 .nudge {
 	margin-left: -15px;
 }
@@ -44,6 +48,16 @@ html, body {
 	position: fixed;
 	bottom: 0;
 	right: 0;
+}
+
+/*ALIGNMENT*/
+
+.center {
+	text-align: center;
+}
+
+.left {
+	text-align: left;
 }
 
 /*NAV*/
@@ -130,11 +144,17 @@ figcaption {
 	margin: 10px 5px 5px 0px;
 }
 
+/*TABLE*/
+
+table.menu {
+	border: 0;
+	width: 100%;
+}
 
 /*IFRAME*/
 
 .iframe-container {
-	padding:;
+	margin: 30px 0 30px 0;
 }
 
 .iframe-wrapper {
@@ -150,8 +170,8 @@ iframe {
 	top: 0;
 	left: 0;
 	border: 0;
-	height: 85%;
-	width: 85%;
+	height: 100%;
+	width: 100%;
 }
 
 	/*@media (max-width: 767px) {
@@ -210,7 +230,7 @@ iframe {
 	padding: 0;
 }
 
-.img-wrapper-sm, .img-wrapper, .img-wrapper-lg {
+.img-wrapper-sm, .img-wrapper, .img-wrapper-lg, .img-wrapper-xl {
 	padding: 15px;
 	display:inline-block;
 }
@@ -227,9 +247,13 @@ iframe {
 	height: 650px;
 }
 
+.img-wrapper-xl {
+	height: 800px;
+}
+
 	@media (max-width: 767px) { 
 
-		.img-wrapper-sm, .img-wrapper, .img-wrapper-lg {
+		.img-wrapper-sm, .img-wrapper, .img-wrapper-lg, .img-wrapper-xl {
 	  		max-width: 600px;
 	  		height: auto;
 			padding: 15px;
