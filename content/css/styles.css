@@ -108,6 +108,14 @@ h2 {
 	letter-spacing: 0.02em;
 }
 
+.uppercase {
+	text-transform: uppercase;
+}
+
+.italic {
+	font-style: italic;
+}
+
 h3 {
 	font-size: 1.10em;
 	letter-spacing: 0.02em;
@@ -230,9 +238,17 @@ iframe {
 	padding: 0;
 }
 
-.img-wrapper-sm, .img-wrapper, .img-wrapper-lg, .img-wrapper-xl {
+.img-wrapper-xs,
+.img-wrapper-sm, 
+.img-wrapper, 
+.img-wrapper-lg, 
+.img-wrapper-xl {
 	padding: 15px;
-	display:inline-block;
+	display: inline-block;
+}
+
+.img-wrapper-xs {
+	height: 350px;
 }
 
 .img-wrapper-sm {
@@ -253,7 +269,11 @@ iframe {
 
 	@media (max-width: 767px) { 
 
-		.img-wrapper-sm, .img-wrapper, .img-wrapper-lg, .img-wrapper-xl {
+		.img-wrapper-xs, 
+		.img-wrapper-sm, 
+		.img-wrapper, 
+		.img-wrapper-lg, 
+		.img-wrapper-xl {
 	  		max-width: 600px;
 	  		height: auto;
 			padding: 15px;
