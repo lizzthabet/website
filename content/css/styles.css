@@ -93,6 +93,10 @@ a.plain, a.plain:hover, .plain {
 	text-decoration: underline;
 }
 
+a.plainer, a.plainer:hover, .plainer {
+	color: inherit;
+}
+
 /*HEADINGS & ELEMENTS*/
 
 h1 {
@@ -150,6 +154,26 @@ hr {
 figcaption {
 	font-size: 0.85em;
 	margin: 10px 5px 5px 0px;
+}
+
+/*POEM HELPERS*/
+
+.poem-original, .poem-generate {
+	float: left;
+	/*width: 40%;*/
+	height: auto;
+	margin: 15px 30px 15px 0 !important;
+	padding: 0;
+	
+}
+.poem-original-bd {
+	border: 1px solid blue;
+	padding: 15px;
+}
+
+.poem-generate-bd {
+	border: 1px solid purple;
+	padding: 15px;
 }
 
 /*TABLE*/
