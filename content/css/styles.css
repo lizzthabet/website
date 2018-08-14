@@ -97,6 +97,25 @@ a.plainer, a.plainer:hover, .plainer {
 	color: inherit;
 }
 
+a.rainbow:hover {
+	-webkit-animation: color_change 0.5s infinite alternate;
+	-moz-animation: color_change 0.5s infinite alternate;
+	-ms-animation: color_change 0.5s infinite alternate;
+	-o-animation: color_change 0.5s infinite alternate;
+	animation: color_change 0.5s infinite alternate;
+}
+
+/* ANIMATIONS */
+
+@keyframes color_change {
+	0% { color: red; }
+	20% { color: orange; }
+	40% { color: yellow; }
+	60% { color: green; }
+	80% { color: blue; }
+	100% { color: purple; }
+}
+
 /*HEADINGS & ELEMENTS*/
 
 h1 {
@@ -164,7 +183,7 @@ figcaption {
 	height: auto;
 	margin: 15px 30px 15px 0 !important;
 	padding: 0;
-	
+
 }
 .poem-original-bd {
 	border: 1px solid blue;
@@ -230,7 +249,7 @@ iframe {
 			width: 980px;
 			height: 551px;
 		}
-		
+
 	}
 
 	@media (min-width: 1200px) {
@@ -263,9 +282,9 @@ iframe {
 }
 
 .img-wrapper-xs,
-.img-wrapper-sm, 
-.img-wrapper, 
-.img-wrapper-lg, 
+.img-wrapper-sm,
+.img-wrapper,
+.img-wrapper-lg,
 .img-wrapper-xl {
 	padding: 15px;
 	display: inline-block;
@@ -291,12 +310,12 @@ iframe {
 	height: 800px;
 }
 
-	@media (max-width: 767px) { 
+	@media (max-width: 767px) {
 
-		.img-wrapper-xs, 
-		.img-wrapper-sm, 
-		.img-wrapper, 
-		.img-wrapper-lg, 
+		.img-wrapper-xs,
+		.img-wrapper-sm,
+		.img-wrapper,
+		.img-wrapper-lg,
 		.img-wrapper-xl {
 	  		max-width: 600px;
 	  		height: auto;
@@ -307,7 +326,7 @@ iframe {
 	 }
 
 	/*IMAGE SIZING BREAKS AT SM QUERIES WHEN NOT IN CONTAINTER FLUID*/
-	@media (min-width: 768px) and (max-width: 991px) { 
+	@media (min-width: 768px) and (max-width: 991px) {
 
 		.img-wrapper-sm.too-long {
 			max-width: 786px;
@@ -325,7 +344,7 @@ iframe {
 	width: auto;
 }
 
-	@media (max-width: 768px) { 
+	@media (max-width: 768px) {
 
 		.img-self {
 			height: auto;
