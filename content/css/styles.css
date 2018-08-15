@@ -40,6 +40,10 @@ html, body {
 	padding: 0 15px 0 15px;
 }
 
+.ptb-15 {
+	padding: 15px 0 15px 0;
+}
+
 .nudge {
 	margin-left: -15px;
 }
@@ -216,6 +220,14 @@ table.menu {
 	max-width:  95%;
 }
 
+.iframe-wrapper-sm {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+	max-width:  85%;
+}
+
 iframe {
 	position: absolute;
 	top: 0;
@@ -290,6 +302,10 @@ iframe {
 	display: inline-block;
 }
 
+.img-wrapper-logo {
+	height: 150px;
+}
+
 .img-wrapper-xs {
 	height: 350px;
 }
@@ -328,6 +344,10 @@ iframe {
 	/*IMAGE SIZING BREAKS AT SM QUERIES WHEN NOT IN CONTAINTER FLUID*/
 	@media (min-width: 768px) and (max-width: 991px) {
 
+		.img-wrapper.too-long {
+			height: 450px;
+		}
+
 		.img-wrapper-sm.too-long {
 			max-width: 786px;
 		}
@@ -349,5 +369,10 @@ iframe {
 		.img-self {
 			height: auto;
 			width: 100%;
+		}
+
+		.img-self.img-logo {
+			height: 150px;
+			width: auto;
 		}
 	 }
