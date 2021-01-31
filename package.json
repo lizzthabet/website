@@ -1,0 +1,17 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "art, books, and wearables",
+  "main": "index.html",
+  "repository": "https://github.com/lizzthabet/website.git",
+  "author": "lizz thabet <lizzthabet@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "serve": "gulp serve",
+    "dev": "gulp develop"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.14",
+    "gulp": "^4.0.2"
+  }
+}
