@@ -1,0 +1,9 @@
+[build]
+
+  base = "/"
+  publish = "src/"
+  functions = "functions/"
+
+[context.production]
+
+  branchname = "live"
