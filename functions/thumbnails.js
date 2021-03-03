@@ -45,6 +45,7 @@ exports.handler = async function (_event, _context) {
       throw new Error('Image thumbnails are unavailable at this time.');
     }
 
+    // `thumbnail`: A string containing the base64-encoded thumbnail data for this file.
     const thumbnails = getThumbnailsResponse.result.entries.map(image => image.thumbnail);
 
     return {

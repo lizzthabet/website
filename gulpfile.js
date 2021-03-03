@@ -9,6 +9,7 @@ const routesForLocalDev = {
   '/publications': 'src/publications.html',
   '/software': 'src/software.html',
   '/the-character': 'src/the-character.html',
+  '/done-feelin': 'src/done-feelin.html',
   '/': 'src/index.html',
 }
 
