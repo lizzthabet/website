@@ -7,14 +7,16 @@
   "author": "lizz thabet <lizzthabet@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "dev": "netlify dev",
     "serve": "gulp serve",
-    "dev": "gulp develop"
+    "gulp dev": "gulp develop"
   },
   "devDependencies": {
     "browser-sync": "^2.26.14",
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "netlify-cli": "^3.29.14"
   },
   "dependencies": {
-    "dropbox": "^9.1.0"
+    "firebase-admin": "^9.5.0"
   }
 }

@@ -1,77 +1,142 @@
+// Endpoints
+const GET_ENDPOINT = '.netlify/functions/get-image';
+const UPLOAD_ENDPOINT = '.netlify/functions/post-image';
 
-// TODO: Use parcel to build js files
-// TODO: Add API environment variable, so you can make requests to both local and prod environments correctly
-// TODO: (optional) Use parcel and netlify dev to replace gulp by configuring them to serve and reload static assets
+// Constants
+const ANGER_FORM_ID = 'anger-upload';
+const ANGER_UPLOAD_INPUT_ID = 'anger-image';
+const ANGER_FORM_BUTTON_ID = 'anger-submit';
+const ANGER_GALLERY_ID = 'anger-gallery';
+const ANGER_CONTAINER_ID = 'anger-container';
+const MAX_IMAGE_UPLOAD_SIZE = 15000000; // 15MB in bytes
+const MAX_IMAGE_DIMENSION = 1100; // in pixels
+const FORM_NOTICE_CLASS = 'form-notice';
+const FORM_ERROR_MESSAGE = `<span class="form-error">Error:</span> Poop! There was an issue uploading your image. If your image is larger than 150mb, you'll need to resize it. Try again, or <a class="plain" href="mailto:lizzthabet@gmail.com?Subject=${encodeURI('Rager upload error')}" target="_blank">let me know you encountered an error</a>.`
+const FORM_SUCCESS_MESSAGE = `<span class="form-success">Upload successful!</span> <i>Let the rivers of our destruction join & flood the whole earth. 💦</i>`
 
-const UPLOAD_ENDPOINT = '.netlify/functions/image'
-const ANGER_FORM_ID = 'anger-upload'
-const ANGER_UPLOAD_INPUT = 'anger-image'
-const MAX_IMAGE_SIZE = 150000000 // 150MB in bytes
-
-document.addEventListener('DOMContentLoaded', (_event) => {
+document.addEventListener('DOMContentLoaded', async (_event) => {
   try {
-    const API_BASE = window.location.origin;
     const angerForm = document.getElementById(ANGER_FORM_ID)
+    const angerButton = document.getElementById(ANGER_FORM_BUTTON_ID)
     if (!angerForm) {
       throw new Error(`No form element present with id ${ANGER_FORM_ID}`)
     }
+    angerForm.addEventListener('change', (_event) => {
+      // Clear any error or success messages when its input changes
+      displayFormMessage(angerForm, 'none')
+    })
   
     angerForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       try {
-        const elements = event.target.elements
+        toggleButtonLoading(angerButton, true)
+        displayFormMessage(angerForm, 'none')
+
+        const elements = event.target.elements;
         if (!elements && !elements.length) {
           throw new Error('No form elements present to process image upload request.')
         }
   
-        const fileInput = elements.namedItem(ANGER_UPLOAD_INPUT)
+        const fileInput = elements.namedItem(ANGER_UPLOAD_INPUT_ID);
         if (!fileInput) {
-          throw new Error(`No input element present with id ${ANGER_UPLOAD_INPUT}`)
+          throw new Error(`No input element present with id ${ANGER_UPLOAD_INPUT_ID}`)
         }
-  
-        // type = file
-        const fileBlob = fileInput.files.item(0) // can be a ReadableStream, USVString, or ArrayBuffer
-        console.log('fileBlob', fileBlob)
-        if (fileBlob.size > MAX_IMAGE_SIZE) {
+
+        const fileBlob = fileInput.files.item(0);
+        if (fileBlob.size > MAX_IMAGE_UPLOAD_SIZE) {
           throw new Error('Uploaded image must be smaller than 150MB.')
         }
 
-        const buffer = await fileBlob.arrayBuffer() // Should return the blob as binary data in an ArrayBuffer
-        // console.log(arrayBuff)
-        // console.log(new Uint8Array(arrayBuff))
-        const dataURL = await loadFile(fileBlob)
-        const binaryData = new Uint8Array(buffer)
+        await uploadAndDisplayImage(fileBlob)
 
-        // TODO: Make request
-        const response = await fetch(`${API_BASE}/${UPLOAD_ENDPOINT}`, {
-          method: 'POST',
-          // convertDataURIToBinary: true,
-          headers: {
-            'Content-Type': 'application/octet-stream'
-            // 'Content-Type': 'application/json'
-          },
-          body: binaryData,
-        })
-
-        const responseBody = await response.json()
-        // TODO: Check response codes
-        console.log(responseBody)
-        // TODO: Add loading state to form
-        // TODO: Add loading state to form
+        toggleButtonLoading(angerButton, false)
+        displayFormMessage(angerForm, 'success')
 
       } catch (error) {
         console.error(error)
+
+        toggleButtonLoading(angerButton, false)
+        displayFormMessage(angerForm, 'error')
       }
-    })
+    });
+
+    // Uncomment for book launch
+    await displayRageGallery();
   } catch (error) {
-    // TODO: Display the error message to the client.
     console.error(error)
   }
 
 });
 
-// TODO: Choose and import a request library?
+// Main
+async function displayRageGallery() {
+  const API_BASE = window.location.origin;
+
+  // Get all images and render
+  const response = await fetch(`${API_BASE}/${GET_ENDPOINT}`, { method: 'GET' });
+
+  if (response.status >= 300) {
+    throw new Error(`Fetching images failed with status ${response.status}`);
+  }
+
+  const parsedResponse = await response.json();
+  if (parsedResponse.images) {
+    const container = document.getElementById(ANGER_GALLERY_ID);
+    const columnContainer = document.createElement('div');
+    columnContainer.classList.add('col-xs-12');
+    const imageContainer = document.createElement('div');
+    imageContainer.classList.add('img-container');
+    imageContainer.id = ANGER_CONTAINER_ID;
+
+    parsedResponse.images.forEach(url => {
+      const { imageWrapper } = createImage(url);
+      imageContainer.appendChild(imageWrapper);
+    });
+
+    columnContainer.appendChild(imageContainer);
+    container.appendChild(columnContainer);
+  }
+};
+
+async function uploadAndDisplayImage(fileBlob) {
+  const dataURL = await extractDataUrl(fileBlob);
+
+  const API_BASE = window.location.origin;
+  const response = await fetch(`${API_BASE}/${UPLOAD_ENDPOINT}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url: dataURL }),
+  });
+
+  if (response.status >= 300) {
+    // TODO: Handle size error specifically
+    /**
+    postImage errored out with status undefined: Error: 3 INVALID_ARGUMENT: The value of property "url" is longer than 1048487 bytes.
+      details: 'The value of property "url" is longer than 1048487 bytes.',
+     */
+    throw new Error(`Uploading image failed with status ${response.status}`);
+  }
+
+  const responseBody = await response.json();
+
+  // Append new image to DOM
+  if (responseBody.image) {
+    const imageContainer = document.getElementById(ANGER_CONTAINER_ID);
+    // Only display the image if the image gallery is present
+    if (imageContainer) {
+      const { imageWrapper } = createImage(dataURL);
+      imageContainer.appendChild(imageWrapper);
+    }
+  }
+};
+
+// Helpers
+async function extractDataUrl(file) {
+  const dataURL = await loadFile(file);
+  const resizedDataURL = await resizeImage(dataURL, file.size);
+  return resizedDataURL;
+};
 
 function loadFile(file) {
   return new Promise((resolve, reject) => {
@@ -82,4 +147,84 @@ function loadFile(file) {
     // Second, parse the file blob as data URL
     fileReader.readAsDataURL(file)
   })
+}
+
+function loadImage (dataUrl) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    // First, set the onload callback
+    image.onload = () => resolve(image)
+    image.onerror = () => reject('Image failed to load')
+    // Second, trigger the image load by setting its source
+    image.src = dataUrl;
+  });
+};
+
+async function resizeImage(dataUrl) {
+  // Determine the image's current size
+  const image = await loadImage(dataUrl);
+ 
+  // Draw the image scaled down
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  // Adjust the dimensions depending on the max dimension
+  if (image.height >= image.width) {
+    const aspectRatio = image.width / image.height;
+    canvas.height = MAX_IMAGE_DIMENSION;
+    canvas.width = aspectRatio * MAX_IMAGE_DIMENSION;
+  } else {
+    const aspectRatio = image.height / image.width;
+    canvas.height = aspectRatio * MAX_IMAGE_DIMENSION;
+    canvas.width = MAX_IMAGE_DIMENSION;
+  }
+
+  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+  // Extract the dataUrl data from the canvas
+  return canvas.toDataURL();
+}
+
+function createImage(dataURL) {
+  const imageWrapper = document.createElement('div');
+  imageWrapper.classList.add('img-wrapper');
+
+  const image = document.createElement('img');
+  image.src = dataURL;
+  image.classList.add('img-self');
+
+  imageWrapper.appendChild(image);
+
+  return { image, imageWrapper };
+}
+
+function toggleButtonLoading(button, loading) {
+  if (!button) {
+    console.warn('No submit button found for anger upload form.')
+
+    return
+  }
+
+  button.disabled = loading
+  button.innerText = loading ? 'Loading...' : 'Upload'
+}
+
+function displayFormMessage(container, messageType) {
+  if (messageType === 'none') {
+    const messages = document.getElementsByClassName(FORM_NOTICE_CLASS)
+
+    while (messages.length > 0) {
+      container.removeChild(messages.item(0))
+    }
+
+  } else if (messageType === 'error' || messageType === 'success') {
+    const messageNode = document.createElement('p')
+    messageNode.classList.add(FORM_NOTICE_CLASS)
+    messageNode.attributes['role'] = 'alert'
+    messageNode.innerHTML = messageType === 'error' ? FORM_ERROR_MESSAGE : FORM_SUCCESS_MESSAGE
+
+    container.appendChild(messageNode)
+  } else {
+    console.warn(`Cannot display form message with unknown type ${messageType}`)
+  }
 }
