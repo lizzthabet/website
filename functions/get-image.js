@@ -1,7 +1,6 @@
 const admin = require('firebase-admin');
 
-// Use the environment-set collection unless in local development
-const FB_IMAGE_COLLECTION = process.env.CONTEXT !== 'dev' ? process.env.FIREBASE_PROJECT_COLLECTION : "images-test";
+const FB_IMAGE_COLLECTION = process.env.CONTEXT === 'production' ? process.env.FIREBASE_PROJECT_COLLECTION : 'images-test';
 
 // Initialize the Firebase app
 if (admin.apps.length === 0) {
@@ -30,7 +29,6 @@ const db = admin.firestore();
  */
 exports.handler = async function (_event, _context) {
   try {
-    console.log(FB_IMAGE_COLLECTION, process.env.CONTEXT)
     // QuerySnapshot docs: https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot
     const snapshot = await db.collection(FB_IMAGE_COLLECTION)
       .where('live', '==', true).get();

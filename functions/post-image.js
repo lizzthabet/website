@@ -1,9 +1,7 @@
 const admin = require('firebase-admin');
 
-// Use the environment-set collection unless in local development
-const FB_IMAGE_COLLECTION = process.env.CONTEXT !== 'dev' ? process.env.FIREBASE_PROJECT_COLLECTION : "images-test";
-// Increment every time there are significant changes
-const DB_VERSION = '1';
+const FB_IMAGE_COLLECTION = process.env.CONTEXT === 'production' ? process.env.FIREBASE_PROJECT_COLLECTION : 'images-test';
+const DB_VERSION = '1'; // Increment every time there are significant changes
 
 // Initialize the Firebase app
 if (admin.apps.length === 0) {
