@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async (_event) => {
     });
 
     // Uncomment for book launch
-    await displayRageGallery();
+    // await displayRageGallery();
   } catch (error) {
     console.error(error)
   }
