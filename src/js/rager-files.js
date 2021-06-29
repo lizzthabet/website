@@ -9,9 +9,10 @@ const ANGER_FORM_BUTTON_ID = 'anger-submit';
 const ANGER_GALLERY_ID = 'anger-gallery';
 const ANGER_CONTAINER_ID = 'anger-container';
 const MAX_IMAGE_UPLOAD_SIZE = 15000000; // 15MB in bytes
-const MAX_IMAGE_DIMENSION = 1100; // in pixels
+const MAX_IMAGE_DIMENSION = 800; // in pixels
+const MAX_BYTE_SIZE = 1048487 // imposed by Firebase, unfortunately
 const FORM_NOTICE_CLASS = 'form-notice';
-const FORM_ERROR_MESSAGE = `<span class="form-error">Error:</span> Poop! There was an issue uploading your image. If your image is larger than 150mb, you'll need to resize it. Try again, or <a class="plain" href="mailto:lizzthabet@gmail.com?Subject=${encodeURI('Rager upload error')}" target="_blank">let me know you encountered an error</a>.`
+const FORM_ERROR_MESSAGE = `<span class="form-error">Error:</span> Poop! There was an issue uploading your image. If your image is larger than 15mb, you'll need to resize it. Try again, or <a class="plain" href="mailto:lizzthabet@gmail.com?Subject=${encodeURI('Rager upload error')}" target="_blank">email me your drawing</a> and I'll upload it for you.`
 const FORM_SUCCESS_MESSAGE = `<span class="form-success">Upload successful!</span> <i>Let the rivers of our destruction join & flood the whole earth. 💦</i>`
 
 document.addEventListener('DOMContentLoaded', async (_event) => {
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async (_event) => {
 
         const fileBlob = fileInput.files.item(0);
         if (fileBlob.size > MAX_IMAGE_UPLOAD_SIZE) {
-          throw new Error('Uploaded image must be smaller than 150MB.')
+          throw new Error('Uploaded image must be smaller than 15MB.')
         }
 
         await uploadAndDisplayImage(fileBlob)
@@ -163,21 +164,51 @@ function loadImage (dataUrl) {
 async function resizeImage(dataUrl) {
   // Determine the image's current size
   const image = await loadImage(dataUrl);
- 
-  // Draw the image scaled down
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
 
   // Adjust the dimensions depending on the max dimension
+  // or the image's largest dimension, whatever's smallest
+  let { height, width } = calculateSize(image, Math.min(Math.max(image.height, image.width), MAX_IMAGE_DIMENSION));
+  
+  // Draw the image scaled down
+  let resizedDataURL = drawResizedImage(image, height, width)
+  let resizeAttempts = 1
+
+  // If the resized image exceeds max upload byte size, incrementally resize until it doesn't
+  // This is hacky... but okay enough
+  while (resizedDataURL.length > MAX_BYTE_SIZE && resizeAttempts <= 5) {
+    const { height: smallerHeight, width: smallerWidth } = calculateSize(image, Math.max(height, width) - 50)
+    height = smallerHeight
+    width = smallerWidth
+    resizedDataURL = drawResizedImage(image, height, width)
+    resizeAttempts++
+  }
+
+  // Note: if the image resize isn't successful, it will error out downstream
+
+  // Extract the dataUrl data from the resized image
+  return drawResizedImage(image, height, width);
+}
+
+function calculateSize(image, maxDimension) {
+  let height, width;
   if (image.height >= image.width) {
     const aspectRatio = image.width / image.height;
-    canvas.height = MAX_IMAGE_DIMENSION;
-    canvas.width = aspectRatio * MAX_IMAGE_DIMENSION;
+    height = maxDimension;
+    width = aspectRatio * maxDimension;
   } else {
     const aspectRatio = image.height / image.width;
-    canvas.height = aspectRatio * MAX_IMAGE_DIMENSION;
-    canvas.width = MAX_IMAGE_DIMENSION;
+    height = aspectRatio * maxDimension;
+    width = maxDimension;
   }
+
+  return { height, width };
+}
+
+function drawResizedImage(image, height, width) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = width
+  canvas.height = height
 
   ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
