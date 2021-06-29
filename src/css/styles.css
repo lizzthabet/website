@@ -61,6 +61,10 @@ html, body {
 	right: 0;
 }
 
+.hidden {
+	visibility: hidden;
+}
+
 /*ALIGNMENT*/
 
 .center {

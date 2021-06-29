@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async (_event) => {
     });
 
     // Uncomment for book launch
-    // await displayRageGallery();
+    await displayRageGallery();
   } catch (error) {
     console.error(error)
   }
@@ -86,6 +86,7 @@ async function displayRageGallery() {
     const container = document.getElementById(ANGER_GALLERY_ID);
     const columnContainer = document.createElement('div');
     columnContainer.classList.add('col-xs-12');
+
     const imageContainer = document.createElement('div');
     imageContainer.classList.add('img-container');
     imageContainer.id = ANGER_CONTAINER_ID;
@@ -94,6 +95,9 @@ async function displayRageGallery() {
       const { imageWrapper } = createImage(url);
       imageContainer.appendChild(imageWrapper);
     });
+
+    const containerHeading = document.getElementById(`${ANGER_GALLERY_ID}-heading`)
+    containerHeading.classList.remove('hidden')
 
     columnContainer.appendChild(imageContainer);
     container.appendChild(columnContainer);
