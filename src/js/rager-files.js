@@ -72,35 +72,39 @@ document.addEventListener('DOMContentLoaded', async (_event) => {
 
 // Main
 async function displayRageGallery() {
-  const API_BASE = window.location.origin;
-
-  // Get all images and render
-  const response = await fetch(`${API_BASE}/${GET_ENDPOINT}`, { method: 'GET' });
-
-  if (response.status >= 300) {
-    throw new Error(`Fetching images failed with status ${response.status}`);
-  }
-
-  const parsedResponse = await response.json();
-  if (parsedResponse.images) {
-    const container = document.getElementById(ANGER_GALLERY_ID);
-    const columnContainer = document.createElement('div');
-    columnContainer.classList.add('col-xs-12');
-
-    const imageContainer = document.createElement('div');
-    imageContainer.classList.add('img-container');
-    imageContainer.id = ANGER_CONTAINER_ID;
-
-    parsedResponse.images.forEach(url => {
-      const { imageWrapper } = createImage(url);
-      imageContainer.appendChild(imageWrapper);
-    });
-
-    const containerHeading = document.getElementById(`${ANGER_GALLERY_ID}-heading`)
-    containerHeading.classList.remove('hidden')
-
-    columnContainer.appendChild(imageContainer);
-    container.appendChild(columnContainer);
+  try {
+    const API_BASE = window.location.origin;
+  
+    // Get all images and render
+    const response = await fetch(`${API_BASE}/${GET_ENDPOINT}`, { method: 'GET' });
+  
+    if (response.status >= 300) {
+      throw new Error(`Fetching images failed with status ${response.status}`);
+    }
+  
+    const parsedResponse = await response.json();
+    if (parsedResponse.images) {
+      const container = document.getElementById(ANGER_GALLERY_ID);
+      const columnContainer = document.createElement('div');
+      columnContainer.classList.add('col-xs-12');
+  
+      const imageContainer = document.createElement('div');
+      imageContainer.classList.add('img-container');
+      imageContainer.id = ANGER_CONTAINER_ID;
+  
+      parsedResponse.images.forEach(url => {
+        const { imageWrapper } = createImage(url);
+        imageContainer.appendChild(imageWrapper);
+      });
+  
+      const containerHeading = document.getElementById(`${ANGER_GALLERY_ID}-heading`)
+      containerHeading.classList.remove('hidden')
+  
+      columnContainer.appendChild(imageContainer);
+      container.appendChild(columnContainer);
+    }
+  } catch (error) {
+    // Don't do anything for now
   }
 };
 

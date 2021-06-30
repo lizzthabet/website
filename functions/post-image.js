@@ -1,6 +1,6 @@
 const admin = require('firebase-admin');
 
-const FB_IMAGE_COLLECTION = process.env.CONTEXT === 'production' ? process.env.FIREBASE_PROJECT_COLLECTION : 'images-test';
+const FB_IMAGE_COLLECTION = process.env.FIREBASE_PROJECT_COLLECTION;
 const DB_VERSION = '1'; // Increment every time there are significant changes
 
 // Initialize the Firebase app
@@ -32,13 +32,14 @@ exports.handler = async function (event, _context) {
   try {
     const imageData = JSON.parse(event.body)
 
-    const fileName = new Date().toUTCString();
-    const fileUpload = db.collection(FB_IMAGE_COLLECTION).doc(fileName);
+    const createdAt = new Date();
+    const fileUpload = db.collection(FB_IMAGE_COLLECTION).doc(createdAt.toUTCString());
 
     await fileUpload.set({
       url: imageData.url,
       live: true,
       version: DB_VERSION,
+      timestamp: admin.firestore.Timestamp.fromDate(createdAt)
     });
 
     return {
