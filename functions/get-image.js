@@ -31,6 +31,7 @@ exports.handler = async function (_event, _context) {
   try {
     // QuerySnapshot docs: https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot
     const snapshot = await db.collection(FB_IMAGE_COLLECTION)
+      .where('live', '==', true)
       .orderBy('timestamp', 'desc')
       .limit(5)
       .get();
