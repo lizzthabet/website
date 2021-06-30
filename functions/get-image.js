@@ -1,6 +1,6 @@
 const admin = require('firebase-admin');
 
-const FB_IMAGE_COLLECTION = process.env.CONTEXT === 'production' ? process.env.FIREBASE_PROJECT_COLLECTION : 'images-test';
+const FB_IMAGE_COLLECTION = process.env.FIREBASE_PROJECT_COLLECTION;
 
 // Initialize the Firebase app
 if (admin.apps.length === 0) {
@@ -31,7 +31,10 @@ exports.handler = async function (_event, _context) {
   try {
     // QuerySnapshot docs: https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot
     const snapshot = await db.collection(FB_IMAGE_COLLECTION)
-      .where('live', '==', true).get();
+      .where('live', '==', true)
+      .orderBy('timestamp', 'desc')
+      .limit(5)
+      .get();
 
     const images = [];
     snapshot.forEach((doc) => {
