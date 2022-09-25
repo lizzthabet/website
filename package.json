@@ -4,7 +4,7 @@
   "description": "art, books, and wearables",
   "main": "index.html",
   "repository": "https://github.com/lizzthabet/website.git",
-  "author": "lizz thabet <lizzthabet@gmail.com>",
+  "author": "lizz thabet <lizzthabet@proton.me>",
   "license": "MIT",
   "scripts": {
     "dev": "netlify dev",
@@ -17,6 +17,6 @@
     "netlify-cli": "^3.29.14"
   },
   "dependencies": {
-    "firebase-admin": "^9.5.0"
+    "firebase-admin": "^11.0.1"
   }
 }
