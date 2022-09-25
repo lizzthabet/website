@@ -12,7 +12,7 @@ const MAX_IMAGE_UPLOAD_SIZE = 15000000; // 15MB in bytes
 const MAX_IMAGE_DIMENSION = 800; // in pixels
 const MAX_BYTE_SIZE = 1048487 // imposed by Firebase, unfortunately
 const FORM_NOTICE_CLASS = 'form-notice';
-const FORM_ERROR_MESSAGE = `<span class="form-error">Error:</span> Poop! There was an issue uploading your image. If your image is larger than 15mb, you'll need to resize it. Try again, or <a class="plain" href="mailto:lizzthabet@gmail.com?Subject=${encodeURI('Rager upload error')}" target="_blank">email me your drawing</a> and I'll upload it for you.`
+const FORM_ERROR_MESSAGE = `<span class="form-error">Error:</span> Poop! There was an issue uploading your image. If your image is larger than 15mb, you'll need to resize it. Try again, or <a class="plain" href="mailto:lizzthabet@proton.me?Subject=${encodeURI('Rager upload error')}" target="_blank">email me your drawing</a> and I'll upload it for you.`
 const FORM_SUCCESS_MESSAGE = `<span class="form-success">Upload successful!</span> <i>Let the rivers of our destruction join & flood the whole earth. 💦</i>`
 
 document.addEventListener('DOMContentLoaded', async (_event) => {
