@@ -431,3 +431,28 @@ iframe {
 .form-error {
 	color: red;
 }
+
+/* I AM HIDING STYLES */
+
+.evasive {
+	position: static;
+	/* For debugging: */
+	/* border: 1px solid green; */
+}
+
+.evasive-wrapper {
+	/* For debugging: */
+	/* background-color: rgba(0, 128, 0, 0.5) */
+}
+
+.evasive-container {
+	height: 400px; /* Some kind of fixed value here!*/
+}
+
+.generator-iframe {
+	position: static;
+	border: 1px solid black;
+	height: 1100px; /* 1100 for full */
+	top: unset;
+	left: unset;
+}
