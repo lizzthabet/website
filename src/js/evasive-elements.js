@@ -30,8 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 function positionElementAbsolute(element) {
   const { top, left } = element.getBoundingClientRect()
-  element.style.setProperty("top", `${top}px`)
-  element.style.setProperty("left", `${left}px`)
+  const { scrollX, scrollY } = window
+  element.style.setProperty("top", `${top + scrollY}px`)
+  element.style.setProperty("left", `${left + scrollX}px`)
   element.style.setProperty("position", "absolute")
 }
 
@@ -44,7 +45,8 @@ function evadeTheMouse(element) {
   }
   
   element.addEventListener("mousemove", (e) => {
-    // Get the location of the element and the mouse
+    // Get the location of the window, element, and mouse
+    const { scrollX, scrollY } = window
     const { clientX: mouseX, clientY: mouseY } = e
     const { top, left, right, bottom, height, width } = element.getBoundingClientRect()
 
@@ -55,6 +57,7 @@ function evadeTheMouse(element) {
     }
 
     // Create vectors for each coordinate to more easily do math operations
+    const windowScrollV = new Vector(scrollX ?? 0, scrollY ?? 0)
     const mouseV = new Vector(mouseX, mouseY)
     const centerV = new Vector(left + width / 2, top + height / 2)
     // Calculate where the line from the center to mouse will extend
@@ -63,8 +66,9 @@ function evadeTheMouse(element) {
     // Calculate how far the mouse is from the edge of the image
     // (where it should be)
     const deltaV = mouseV.subtract(targetV)
-    // Move the corner of the image the same amount
-    const newTopLeftV = new Vector(left, top).add(deltaV)
+    // Move the corner of the image the same amount, plus add
+    // the scroll location to the calculated coordinates
+    const newTopLeftV = new Vector(left, top).add(deltaV).add(windowScrollV)
 
     // TODO: Make these not get stuck in the corner!
     if (newTopLeftV.x < 0) {
