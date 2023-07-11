@@ -431,3 +431,42 @@ iframe {
 .form-error {
 	color: red;
 }
+
+/* I AM HIDING STYLES */
+
+.evasive {
+	position: static;
+	/* For debugging: */
+	/* border: 1px solid green; */
+}
+
+.evasive-wrapper {
+	/* For debugging: */
+	/* background-color: rgba(0, 128, 0, 0.5) */
+}
+
+.evasive-container {
+	height: 400px; /* Placeholder for images that get moved */
+	max-width: 750px;
+}
+
+.evasive-caption-container {
+	display: flex;
+	flex-direction: row;
+	/* Hardcoded values for now */
+	max-width: 750px;
+}
+
+.evasive-caption-container > figcaption {
+	/* Hardcoded values for now */
+	margin-left: 25px;
+	margin-right: 70px;
+}
+
+.generator-iframe {
+	position: static;
+	border: 1px solid black;
+	height: 1100px; /* 1100 for full */
+	top: unset;
+	left: unset;
+}
