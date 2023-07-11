@@ -446,7 +446,21 @@ iframe {
 }
 
 .evasive-container {
-	height: 400px; /* Some kind of fixed value here!*/
+	height: 400px; /* Placeholder for images that get moved */
+	max-width: 750px;
+}
+
+.evasive-caption-container {
+	display: flex;
+	flex-direction: row;
+	/* Hardcoded values for now */
+	max-width: 750px;
+}
+
+.evasive-caption-container > figcaption {
+	/* Hardcoded values for now */
+	margin-left: 25px;
+	margin-right: 70px;
 }
 
 .generator-iframe {
