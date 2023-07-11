@@ -447,7 +447,8 @@ iframe {
 
 .evasive-container {
 	height: 400px; /* Placeholder for images that get moved */
-	max-width: 750px;
+	display: flex;
+	justify-content: center;
 }
 
 .evasive-caption-container {
@@ -469,4 +470,8 @@ iframe {
 	height: 1100px; /* 1100 for full */
 	top: unset;
 	left: unset;
+}
+
+.demo {
+	margin: 700px auto;
 }

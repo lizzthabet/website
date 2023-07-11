@@ -18,9 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
       // updating the elements' positions later won't shift
       // the layout for other elements that have not been
       // positioned absolutely
-      positionElementAbsolute(wrapper)
+      positionElement(wrapper)
       // Add "mouseover" evasion listener to each image
       evadeTheMouse(wrapper)
+    }
+  }
+  for (let i = wrappers.length; i >= 0; i--) {
+    const wrapper = wrappers.item(i)
+    if (wrapper) {
+      positionElementAbsolute(wrapper)
     }
   }
 })
@@ -28,11 +34,14 @@ document.addEventListener("DOMContentLoaded", () => {
 /**
  * @param {HTMLDivElement} element
  */
-function positionElementAbsolute(element) {
+function positionElement(element) {
   const { top, left } = element.getBoundingClientRect()
   const { scrollX, scrollY } = window
   element.style.setProperty("top", `${top + scrollY}px`)
   element.style.setProperty("left", `${left + scrollX}px`)
+}
+
+function positionElementAbsolute(element) {
   element.style.setProperty("position", "absolute")
 }
 
