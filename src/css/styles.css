@@ -120,7 +120,7 @@ a.rainbow:hover {
 	animation: color_change 0.5s infinite alternate;
 }
 
-/* ANIMATIONS */
+/*ANIMATIONS*/
 
 @keyframes color_change {
 	0% { color: red; }
@@ -351,11 +351,11 @@ iframe {
 
 	@media (max-width: 767px) {
 
-		.img-wrapper-xs,
-		.img-wrapper-sm,
-		.img-wrapper,
-		.img-wrapper-lg,
-		.img-wrapper-xl {
+		.img-wrapper-xs:not(.do-not-scale),
+		.img-wrapper-sm:not(.do-not-scale),
+		.img-wrapper:not(.do-not-scale),
+		.img-wrapper-lg:not(.do-not-scale),
+		.img-wrapper-xl:not(.do-not-scale) {
 	  		max-width: 600px;
 	  		height: auto;
 				padding: 15px;
@@ -389,7 +389,7 @@ iframe {
 
 	@media (max-width: 768px) {
 
-		.img-self {
+		.img-self:not(.do-not-scale) {
 			height: auto;
 			width: 100%;
 		}
@@ -432,7 +432,7 @@ iframe {
 	color: red;
 }
 
-/* I AM HIDING STYLES */
+/*I AM HIDING STYLES*/
 
 .evasive {
 	position: static;

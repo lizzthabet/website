@@ -1,38 +1,72 @@
 const IMAGE_CLASS = "evasive"
 const IMAGE_WRAPPER_CLASS = "evasive-wrapper"
 
-document.addEventListener("DOMContentLoaded", () => {
+// Use the `load` event because it fires after the images
+// are fetched and loaded. Otherwise there may be a race condition.
+window.addEventListener("load", () => {
   const wrappers = document.getElementsByClassName(IMAGE_WRAPPER_CLASS)
-  const images = document.getElementsByClassName(IMAGE_CLASS)
-  if (!wrappers.length || !images.length) {
-    console.warn("No images found.")
+  if (!wrappers.length) {
+    console.warn("No elements found.")
     return
   }
+  // Position absolutely with current location so that
+  // updating the elements' positions later won't shift
+  // the layout for other elements that have not been
+  // positioned absolutely.
 
   // Iterate in reverse to avoid shifting layout while
   // changing elements' positions
   for (let i = wrappers.length; i >= 0; i--) {
     const wrapper = wrappers.item(i)
     if (wrapper) {
-      // Position absolutely with current location so that
-      // updating the elements' positions later won't shift
-      // the layout for other elements that have not been
-      // positioned absolutely
+      // Add `top` and `left` coordinates before
+      // positioning absolutely
+      positionElement(wrapper)
+    }
+  }
+
+  for (let i = wrappers.length; i >= 0; i--) {
+    const wrapper = wrappers.item(i)
+    if (wrapper) {
+      // Next, change the position of each element.
+      // This is done in two steps to minimize layout
+      // shift that could happen in the timing of iterating
+      // through elements and adjusting their position.
       positionElementAbsolute(wrapper)
-      // Add "mouseover" evasion listener to each image
+    }
+  }
+})
+
+document.addEventListener("DOMContentLoaded", () => {
+  const wrappers = document.getElementsByClassName(IMAGE_WRAPPER_CLASS)
+  if (!wrappers.length) {
+    console.warn("No elements found.")
+    return
+  }
+
+  // Add "mouseover" evasion listener to each image
+  for (let i = 0; i <= wrappers.length; i++) {
+    const wrapper = wrappers.item(i)
+    if (wrapper) {
       evadeTheMouse(wrapper)
     }
   }
 })
 
 /**
- * @param {HTMLDivElement} element
+ * @param {HTMLElement} element
  */
-function positionElementAbsolute(element) {
+function positionElement(element) {
   const { top, left } = element.getBoundingClientRect()
   const { scrollX, scrollY } = window
   element.style.setProperty("top", `${top + scrollY}px`)
   element.style.setProperty("left", `${left + scrollX}px`)
+}
+
+/**
+ * @param {HTMLElement} element
+ */
+function positionElementAbsolute(element) {
   element.style.setProperty("position", "absolute")
 }
 
