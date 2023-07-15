@@ -1,43 +1,87 @@
 const IMAGE_CLASS = "evasive"
 const IMAGE_WRAPPER_CLASS = "evasive-wrapper"
 
-document.addEventListener("DOMContentLoaded", () => {
-  const wrappers = document.getElementsByClassName(IMAGE_WRAPPER_CLASS)
-  const images = document.getElementsByClassName(IMAGE_CLASS)
-  if (!wrappers.length || !images.length) {
-    console.warn("No images found.")
-    return
-  }
-
-  // Iterate in reverse to avoid shifting layout while
-  // changing elements' positions
-  for (let i = wrappers.length; i >= 0; i--) {
+// Use the `load` event because it fires after the images
+// are fetched and loaded. Otherwise there may be a race condition.
+window.addEventListener("load", () => {
+  const wrappers = getElements(IMAGE_WRAPPER_CLASS)
+  
+  // Position elements absolutely with current location so
+  // that updating the elements' positions later won't shift
+  // the layout for other elements that have not been
+  // positioned absolutely.
+  for (let i = 0; i < wrappers.length; i++) {
     const wrapper = wrappers.item(i)
     if (wrapper) {
-      // Position absolutely with current location so that
-      // updating the elements' positions later won't shift
-      // the layout for other elements that have not been
-      // positioned absolutely
+      // First, add `top` and `left positions
+      positionElement(wrapper)
+    }
+  }
+
+  for (let i = 0; i < wrappers.length; i++) {
+    const wrapper = wrappers.item(i)
+    if (wrapper) {
+      // Next, change the position of each element.
+      // This is done in two steps to minimize layout
+      // shift that could happen in the timing of iterating
+      // through elements and adjusting their position.
       positionElementAbsolute(wrapper)
-      // Add "mouseover" evasion listener to each image
+    }
+  }
+})
+
+document.addEventListener("DOMContentLoaded", () => {
+  const wrappers = getElements(IMAGE_WRAPPER_CLASS)
+
+  // Add "mouseover" evasion listener to each image
+  for (let i = 0; i <= wrappers.length; i++) {
+    const wrapper = wrappers.item(i)
+    if (wrapper) {
       evadeTheMouse(wrapper)
     }
   }
 })
 
 /**
- * @param {HTMLDivElement} element
+ * Get a list of elements by class name
+ * @param {string} className
+ * @returns {HTMLCollection}
  */
-function positionElementAbsolute(element) {
+function getElements(className) {
+  const wrappers = document.getElementsByClassName(className)
+  if (!wrappers.length) {
+    console.warn("No elements found.")
+  }
+
+  return wrappers
+}
+
+/**
+ * Add `top` and `left` styles to element based on
+ * its current position
+ * @param {HTMLElement} element
+ */
+function positionElement(element) {
   const { top, left } = element.getBoundingClientRect()
   const { scrollX, scrollY } = window
   element.style.setProperty("top", `${top + scrollY}px`)
   element.style.setProperty("left", `${left + scrollX}px`)
+}
+
+/**
+ * Add `position: absolute` style to element
+ * @param {HTMLElement} element
+ */
+function positionElementAbsolute(element) {
   element.style.setProperty("position", "absolute")
 }
 
 /**
- * @param {HTMLDivElement} element
+ * Add a `mouseover` event listener to an element
+ * so that the element's position changes and moves
+ * away from the mouse every time it hovers over
+ * the element
+ * @param {HTMLElement} element
  */
 function evadeTheMouse(element) {
   if (!element) {
@@ -85,38 +129,16 @@ function evadeTheMouse(element) {
   })
 }
 
-// A simple vector implementation
-class Vector {
-  constructor(x, y) {
-    this.x = x
-    this.y = y
-  }
-
-  add(v2) {
-    return new Vector(this.x + v2.x, this.y + v2.y)
-  }
-
-  subtract(v2) {
-    return new Vector(this.x - v2.x, this.y - v2.y)
-  }
-
-  multiply(factor) {
-    return new Vector(this.x * factor, this.y * factor)
-  }
-
-  divide(factor) {
-    return new Vector(this.x / factor, this.y / factor)
-  }
-
-  length() {
-    return Math.sqrt(this.x * this.x + this.y * this.y)
-  }
-
-  normalize() {
-    return this.divide(this.length())
-  }
-}
-
+/**
+ * Append a shape to the body with a specific position
+ * and dimensions. Optionally customize color and radius.
+ * @param {number} top
+ * @param {number} left
+ * @param {number} height
+ * @param {number} width
+ * @param {string} [color="red"]
+ * @param {number} [radius]
+ */
 function createDebugShape(top, left, height, width, color = "red", radius) {
   const div = document.createElement("div")
   div.style.setProperty("background-color", color)
@@ -132,28 +154,95 @@ function createDebugShape(top, left, height, width, color = "red", radius) {
   document.body.appendChild(div)
 }
 
-function getIntersectingPoint(element, center, mouse) {
+/**
+ * A vector with (`x`, `y`) coordinates and methods for
+ * basic vector math operations
+ */
+class Vector {
+  /**
+   * Create a vector
+   * @param {number} x The x coordinate
+   * @param {number} y The y coordinate
+   */
+  constructor(x, y) {
+    this.x = x
+    this.y = y
+  }
+
+  /**
+   * @param {Vector} v2
+   */
+  add(v2) {
+    return new Vector(this.x + v2.x, this.y + v2.y)
+  }
+
+  /**
+   * @param {Vector} v2
+   */
+  subtract(v2) {
+    return new Vector(this.x - v2.x, this.y - v2.y)
+  }
+
+  /**
+   * @param {number} factor A number to multiply the vector by
+   */
+  multiply(factor) {
+    return new Vector(this.x * factor, this.y * factor)
+  }
+
+   /**
+   * @param {number} factor A number to divide the vector by
+   */
+  divide(factor) {
+    return new Vector(this.x / factor, this.y / factor)
+  }
+
+  length() {
+    return Math.sqrt(this.x * this.x + this.y * this.y)
+  }
+
+  normalize() {
+    return this.divide(this.length())
+  }
+}
+
+/**
+ * Find the point where the vector from the center of the HMTL element
+ * to the mouse will intersect with the edge of the HTML element
+ * @param {HTMLElement} element The HTML element
+ * @param {Vector} center A vector representing the element's center coordinates
+ * @param {Vector} mouse A vector representing the mouse coordinates
+ * @param {boolean} [debug=false] Option to draw shapes to help with debugging
+ * @returns {Vector} The vector of the intersection
+ */
+function getIntersectingPoint(element, center, mouse, debug = false) {
   const edges = findNearestEdges(element, center, mouse)
 
   // Calculate the intersecting point for the two closest edges.
   // One edge will have an intersecting point on the edge of the element.
   for (let i = 0; i < edges.length; i++) {
-    const { intersection } = edges[i]
+    const edge = edges[i]
     const slope = getSlope(center, mouse)
-    // createDebugShape(center.y, center.x, 5, 5, "blue", 2)
+    if (debug) {
+      createDebugShape(center.y, center.x, 5, 5, "blue", 2)
+    }
     const { solveForX, solveForY } = getEquations(slope, mouse)
-    if (intersection.x === undefined) {
-      const { y } = intersection
+    if (edge.x === undefined) {
+      const { y } = edge
       const x = solveForX(y)
       if (x <= element.right && x >= element.left) {
-        // createDebugShape(y, x, 3, 3, "green", 2)
+        if (debug) {
+          createDebugShape(y, x, 3, 3, "green", 2)
+        }
         return new Vector(x, y)
       }
-    } else if (intersection.y === undefined) {
-      const { x } = intersection
+    } else if (edge.y === undefined) {
+      const { x } = edge
       const y = solveForY(x)
       if (y <= element.bottom && y >= element.top) {
-        // createDebugShape(y, x, 3, 3, "yellow", 2)
+        if (debug) {
+          createDebugShape(y, x, 3, 3, "yellow", 2)
+        }
         return new Vector(x, y)
       }
     } else {
@@ -162,46 +251,72 @@ function getIntersectingPoint(element, center, mouse) {
   }
 }
 
+/**
+ * @typedef {object} Edge
+ * @property {number|undefined} x
+ * @property {number|undefined} y
+ */
+
+/**
+ * Find the two edges of an HTML element that are closest
+ * to the mouse hovering over it
+ * @param {HTMLElement} element The HTML element
+ * @param {Vector} center A vector representing the element's center coordinates
+ * @param {Vector} mouse A vector representing the mouse coordinates
+ * @returns {Edge[]} An array of the two closest edges with either an `x` or `y` value
+ */
 function findNearestEdges(element, center, mouse) {
   const edges = []
-  const lines = getEdges(element)
   if (mouse.x <= center.x) {
     // Mouse is on the left
-    edges.push({ edge: lines[3], intersection: { x: element.left, y: undefined } })
+    edges.push({ x: element.left, y: undefined })
   } else {
     // Mouse is on the right
-    edges.push({ edge: lines[1], intersection: { x: element.right, y: undefined } })
+    edges.push({ x: element.right, y: undefined })
   }
   
   if (mouse.y <= center.y) {
     // Mouse is on the top
-    edges.push({ edge: lines[0], intersection: { x: undefined, y: element.top } })
+    edges.push({ x: undefined, y: element.top })
   } else {
     // Mouse is on the bottom
-    edges.push({ edge: lines[2], intersection: { x: undefined, y: element.bottom } })
+    edges.push({ x: undefined, y: element.bottom })
   }
 
   return edges
 }
 
-function getEdges({ left, right, bottom, top }) {
-  return [
-    [{ x: left, y: top }, { x: right, y: top }], // top
-    [{ x: right, y: top }, { x: right, y: bottom }], // right
-    [{ x: right, y: bottom }, { x: left, y: bottom }], // bottom
-    [{ x: left, y: bottom }, { x: left, y: top }], // left
-  ]
-}
-
+/**
+ * Calculate the slope of the line between two vectors
+ * @param {Vector} point1
+ * @param {Vector} point2
+ * @returns {number}
+ */
 function getSlope(point1, point2) {
 	return (point2.y - point1.y) / (point2.x - point1.x)
 }
 
+/**
+ * Returns two functions that calculate coordinates
+ * on the same line, given either an `x` coordinate
+ * or a `y` coordinate
+ * @param {number} slope The slope of a line
+ * @param {Vector} point A known point on the line
+ */
+
 function getEquations(slope, point) {
+  /**
+   * @param {number} x The `x` coordinate on the line
+   * @returns {number} The `y` coordinate on the line
+   */
 	function solveForY(x) {
   	return slope * x - slope * point.x + point.y
   }
 
+  /**
+   * @param {number} y The `y` coordinate on the line
+   * @returns {number} The `x` coordinate on the line
+   */
   function solveForX(y) {
   	return (y - point.y + slope * point.x) / slope
   }
