@@ -1,11 +1,30 @@
-const IMAGE_CLASS = "evasive"
-const IMAGE_WRAPPER_CLASS = "evasive-wrapper"
+const CONTAINER_CLASS = "evasive-container"
+const CAPTION_CLASS = "evasive-caption"
+const IMAGE_WRAPPER_CLASS = "evasive"
 
 // Use the `load` event because it fires after the images
 // are fetched and loaded. Otherwise there may be a race condition.
 window.addEventListener("load", () => {
+  const containers = getElements(CONTAINER_CLASS)
+  const captions = getElements(CAPTION_CLASS)
   const wrappers = getElements(IMAGE_WRAPPER_CLASS)
-  
+
+  for (let i = 0; i < containers.length; i++) {
+    const container = containers.item(i)
+    if (container) {
+      // Set height and width so containers stay in place
+      sizeElement(container)
+    }
+  }
+
+  for (let i = 0; i < captions.length; i++) {
+    const caption = captions.item(i)
+    if (caption) {
+      // Set height and width so captions stay in place
+      sizeElement(caption)
+    }
+  }
+
   // Position elements absolutely with current location so
   // that updating the elements' positions later won't shift
   // the layout for other elements that have not been
@@ -54,6 +73,17 @@ function getElements(className) {
   }
 
   return wrappers
+}
+
+/**
+ * Size the element's height and width explicitly
+ * based on current height and width
+ * @param {HTMLElement} element
+ */
+function sizeElement(element) {
+  const { height, width } = element.getBoundingClientRect()
+  element.style.setProperty("height", `${height}px`)
+  element.style.setProperty("width", `${width}px`)
 }
 
 /**
