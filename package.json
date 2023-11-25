@@ -14,7 +14,7 @@
   "devDependencies": {
     "browser-sync": "^2.26.14",
     "gulp": "^4.0.2",
-    "netlify-cli": "^3.29.14"
+    "netlify-cli": "^17.7.0"
   },
   "dependencies": {
     "firebase-admin": "^11.0.1"
