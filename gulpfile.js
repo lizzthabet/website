@@ -2,15 +2,15 @@ const { watch } = require('gulp')
 const browserSync = require('browser-sync').create()
 
 const routesForLocalDev = {
-  '/about': 'src/about.html',
-  '/command-a': 'src/command-a.html',
-  '/dies-alone': 'src/dies-alone.html',
-  '/drawings': 'src/drawings.html',
-  '/publications': 'src/publications.html',
-  '/software': 'src/software.html',
-  '/the-character': 'src/the-character.html',
-  '/done-feelin': 'src/done-feelin.html',
-  '/': 'src/index.html',
+  '/about': 'public/about.html',
+  '/command-a': 'public/command-a.html',
+  '/dies-alone': 'public/dies-alone.html',
+  '/drawings': 'public/drawings.html',
+  '/publications': 'public/publications.html',
+  '/software': 'public/software.html',
+  '/the-character': 'public/the-character.html',
+  '/done-feelin': 'public/done-feelin.html',
+  '/': 'public/index.html',
 }
 
 const reload = (done) => {
@@ -20,10 +20,10 @@ const reload = (done) => {
 
 // Watching files
 const watchFiles = () => {
-  watch('src/css/*', reload)
-  watch('src/img/*', reload)
-  watch('src/*.html', reload)
-  watch('src/js/*.js', reload)
+  watch('public/css/*', reload)
+  watch('public/img/*', reload)
+  watch('public/*.html', reload)
+  watch('public/js/*.js', reload)
 }
 
 // Serving files
@@ -31,7 +31,7 @@ const serve = () => {
   browserSync.init({
     port: 8081,
     server: {
-      baseDir: 'src',
+      baseDir: 'public',
       routes: routesForLocalDev
     }
   })
