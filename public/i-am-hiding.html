@@ -19,6 +19,40 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+
+    <style>
+      .evasive {
+        /* Rough value to make grid columns align
+        when there are multiple rows */
+        min-width: 155px;
+        /* text-align: center; */
+      }
+
+      .evasive-caption {
+        display: inline-flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: end;
+      }
+
+      .evasive-caption > figcaption {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .evasive-container {
+        /* Rough value to enforce four image per row*/
+        max-width: 800px; 
+      }
+
+      .generator-iframe {
+        position: static;
+        border: 1px solid black;
+        height: 1100px;
+        top: unset;
+        left: unset;
+      }
+    </style>
   </head>
   <body>
     <header class="container header">
