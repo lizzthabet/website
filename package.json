@@ -7,14 +7,11 @@
   "author": "lizz thabet <lizzthabet@proton.me>",
   "license": "MIT",
   "scripts": {
-    "dev": "netlify dev",
-    "serve": "gulp serve",
-    "gulp dev": "gulp develop"
+    "dev": "npx nodemon ./dev-server.js --ext js,html,css"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.14",
-    "gulp": "^4.0.2",
-    "netlify-cli": "^17.7.0"
+    "nodemon": "^3.1.1",
+    "ws": "^8.17.0"
   },
   "dependencies": {
     "firebase-admin": "^11.0.1"
