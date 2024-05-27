@@ -185,13 +185,35 @@ li {
 hr {
 	width: 90%;
 	height: 1px;
-    border: 0;
-    border-top: 1px solid #a9a9a9;
+	border: 0;
+	border-top: 1px solid #a9a9a9;
+}
+
+summary {
+	cursor: pointer;
+	/* Reset normalize.less */
+	display: list-item;
 }
 
 figcaption {
 	font-size: 0.85em;
 	margin: 10px 5px 5px 0px;
+}
+
+/* HOMPAGE */
+
+.list-link {
+	align-items: center;
+	display: flex;
+	margin-top: 0;
+	margin-bottom: 10px;
+	min-height: 75px;
+}
+
+.list-link-expansion {
+	color: blue;
+	font-size: 1.25em;
+	/* min-height: 75px; */
 }
 
 /*POEM HELPERS*/

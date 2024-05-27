@@ -9,7 +9,7 @@
     <!-- WELCOME TO MY WEB-O-SITE -->
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-grid.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="css/styles.css" rel="stylesheet">
@@ -25,113 +25,113 @@
   </head>
   <body>
 
-  <div class="container header">
+  <header class="container header">
     <nav class="col-xs-12">
-      <a href="/"><img src="img/lizzthabet.svg" class="header-img" /></a>
+      <a aria-label="home" href="/"><img src="img/lizzthabet.svg" class="header-img" alt="the text 'lizz thabet' handwritten in all-caps" /></a>
     </nav>
-  </div>
+  </header>
 
   <div class="container">
-  <div class="row main">
-    <div class="col-xs-12">
-      <h1><a class="rainbow" href="/" name="top">SOFTWARE</a></h1>
-      <p>An expanding collection of code works, projects, and developments. <a class="plain rainbow" href="http://github.com/lizzthabet">View my work on GitHub, too</a>.</p>
-    </div>
-  </div>
-
-  <div class="row mt-20">
-    <div class="col-xs-12">
-      <h2>Let's peel an onion! A short introduction to Tor <em>(in progress)</em></h2>
-      <p>A first iteration of a series of technology education exercises about forms of networking and the Internet</p>
-      <p>
-        <a class="plain rainbow" href="https://github.com/lizzthabet/itp-onion-presentation">View workshop slides</a> || 
-        <a class="plain rainbow" href="https://github.com/lizzthabet/itp-onion-demo">View workshop demo</a>
-      </p>
-      <p>
-        <em>Let's peel an onion!</em> is a workshop I put together for NYU's ITP Camp 2022, a peer-driven learning and experimentation environment focused on skillshare. This workshop introduces people to an open-source, privacy-centric tool called Tor that's used around the world to access websites and share information securely. I'm expanding the workshop series to experiment more with how technology education can be an exercise in collective imagination and possiblity.
-      </p>
-    </div>
-  </div>
-
-  <div class="row mt-20">
-    <div class="col-xs-12">
-      <h2>I am hiding all year round (and you can, too) <em>(in progress)</em></h2>
-      <p>A homemade speculative camouflage pattern generator.</p>
-      <p>
-        <a class="plain rainbow" href="https://hide.lizz.website">View pattern generator</a> || 
-        <a class="plain rainbow" href="http://fqxxc5nj46irxroqwlrq4kumoa7dxfb2ri6xqs6pzcqwjesthdnzcmyd.onion/">View onion service</a> || 
-        <a class="plain rainbow" href="https://github.com/lizzthabet/speculative-camouflage">View source code</a>
-      </p>
-      <p>A Typescript web application that can be used to create large patterns for wearables based on photographs of specific environments. It generates several designs that use multiscale and shape-disruptive camouflage techniques loosely based on <a class="plain rainbow" href="https://www.academia.edu/21209710/Urban_camouflage_assessment_through_visual_search_and_computational_saliency">a scientific paper published in 2013</a>. Multiscale patterns employ details at various spatial scales to disguise the wearer, while disruptive patterns aim to distort and interrupt the wearer's outline using blocks of shapes.</p>
-      <p>This tool's patterns are rooted in the "real," "historical," and "scientific" but dismiss efficacy to speculate about how (and if?) camouflage can be used as a personal tool for bodied agency. It's a part of a magical, material, and metaphorical costume that I'm building for myself, as a queer, femme body that lives and moves within a large city. I imagine camouflage as a conceptual and literal technology to hide, obscure, and misrecognize my body in public and corporate space.</p>
-      <!-- TODO: Add description of onion service piece. -->
-      <div class="img-container">
-        <div class="img-wrapper too-long">
-          <img class="img-self too-long" src="img/software/subway-noise-camouflage.png" />
-          <figcaption>A screenshot of a multiscale pattern generated from a photograph of an empty subway car in New York City</figcaption>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-20">
-    <div class="col-xs-12">
-      <h2 id="mime-tool">MIME</h2>
-      <p>An easy-to-use, minimalist wireframing tool powered by machine learning.</p>
-      <p><a class="plain rainbow" href="https://youtu.be/HG2ZZigbxG0?t=33">Watch a demo</a> || <a class="plain rainbow" href="https://github.com/mime-dream-team">View code base</a></p>
-      <p>As you sketch, Mime transforms your hand-drawn circles and rectangles into clean shapes in real-time. It's powered by a custom-built TensorFlow.js (TF) model that we trained to recognize basic shapes using strokes drawn on an HTML canvas. The front-end workspace relies on React-Konva.js to create moveable, transformable shapes, Socket.io to communicate with the TF model, and React/Redux to manage wireframe rendering and updates. Each wireframe is automatically saved to a PostgreSQL database and accessible through a unique URL.</p>
-      <p>Built in collaboration with <a class="plain rainbow" href="https://github.com/cofuente">Chiara Marcial Martínez</a> and <a class="plain rainbow" href="https://github.com/ivanfex">Ivan Felix</a>.</p>
-      <p>Note: Mime's deployment is a little delayed as we work through an issue with the TensorFlow team. View the demo to get a full walkthrough of the application.</p>
-      <div class="img-container">
-        <div class="img-wrapper too-long">
-          <img class="img-self too-long" src="img/software/mime-wikipedia.gif" />
-          <figcaption>A speedy wireframe of Wikipedia using Mime's drawing canvas with resizable, draggable shapes</figcaption>
-        </div>
-      </div>
-      <div class="ptb-15 col-md-8">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/HG2ZZigbxG0?rel=0&amp;showinfo=0&amp;start=33&amp;color=white&amp;modestbranding=1&amp;cc_load_policy=1" frameborder="0" allow="autoplay; encrypted-media" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-          </div>
-          <figcaption>A video walkthrough of Mime and the technology behind the app</figcaption>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-20">
-    <div class="col-xs-12">
-      <h2>MIRROR, MIRROR</h2>
-      <p>A playful, responsive interface that continuously changes when it detects your face, mouth, and eyes.</p>
-      <p><a class="plain rainbow" href="https://mirror-mirror.lizz.website">Look into the Mirror</a> || <a class="plain rainbow" href="https://github.com/lizzthabet/mirror-mirror">View source code</a></p>
-      <p>Mirror, mirror uses trackingjs, p5js, and React to build an interactive UI that changes depending on how you look at it. It's an experiment in the performance of looking at an interface looking back at you. Built during a four-day hackathon.</p>
-      <div class="img-container">
-        <div class="img-wrapper-sm">
-          <img class="img-self" src="img/software/mirror-mirror.jpg" />
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-20">
-    <div class="col-xs-12">
-      <h2>DIRECTORY</h2>
-      <p>An experimental linked list.</p>
-      <p><a class="plain rainbow" href="https://lizzthabet.github.io/directory/">View the Directory</a></p>
-      <p>Directory is an experimental resource list that gathers lectures, meetups, groups, zines, books, videos, pdfs, and people who engage with technology, art, activism, movement, networks, and theory in overlapping and myriad ways. It started out as my own mental mind map because I found I was often sharing resources with people across disciplines. Directory uses a simple framework called <a href="http://thisisourwork.net/binder/#About" class="plain rainbow">Binder</a> to leverage the power of Google Docs for collaboration. Contribute by adding links and descriptions.</p>
-      <div class="img-container">
-        <div class="img-wrapper-sm">
-          <img class="img-self" src="img/software/directory.jpg" />
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="row">
+    <div class="row main">
       <div class="col-xs-12">
-      <nav class="bottom"><a href="/">HOME</a> <a href="#top" class="pl-35">BACK TO TOP</a></nav>
+        <h1><a class="rainbow" href="/" name="top">SOFTWARE</a></h1>
+        <p>An expanding collection of code works, projects, and developments. <a class="plain rainbow" href="http://github.com/lizzthabet">View my work on GitHub, too</a>.</p>
+      </div>
+    </div>
+
+    <div class="row mt-20">
+      <div class="col-xs-12">
+        <h2>Let's peel an onion! A short introduction to Tor <em>(in progress)</em></h2>
+        <p>A first iteration of a series of technology education exercises about forms of networking and the Internet</p>
+        <p>
+          <a class="plain rainbow" href="https://github.com/lizzthabet/itp-onion-presentation">View workshop slides</a> || 
+          <a class="plain rainbow" href="https://github.com/lizzthabet/itp-onion-demo">View workshop demo</a>
+        </p>
+        <p>
+          <em>Let's peel an onion!</em> is a workshop I put together for NYU's ITP Camp 2022, a peer-driven learning and experimentation environment focused on skillshare. This workshop introduces people to an open-source, privacy-centric tool called Tor that's used around the world to access websites and share information securely. I'm expanding the workshop series to experiment more with how technology education can be an exercise in collective imagination and possiblity.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mt-20">
+      <div class="col-xs-12">
+        <h2>I am hiding all year round (and you can, too) <em>(in progress)</em></h2>
+        <p>A homemade speculative camouflage pattern generator.</p>
+        <p>
+          <a class="plain rainbow" href="https://hide.lizz.website">View pattern generator</a> || 
+          <a class="plain rainbow" href="http://fqxxc5nj46irxroqwlrq4kumoa7dxfb2ri6xqs6pzcqwjesthdnzcmyd.onion/">View onion service</a> || 
+          <a class="plain rainbow" href="https://github.com/lizzthabet/speculative-camouflage">View source code</a>
+        </p>
+        <p>A Typescript web application that can be used to create large patterns for wearables based on photographs of specific environments. It generates several designs that use multiscale and shape-disruptive camouflage techniques loosely based on <a class="plain rainbow" href="https://www.academia.edu/21209710/Urban_camouflage_assessment_through_visual_search_and_computational_saliency">a scientific paper published in 2013</a>. Multiscale patterns employ details at various spatial scales to disguise the wearer, while disruptive patterns aim to distort and interrupt the wearer's outline using blocks of shapes.</p>
+        <p>This tool's patterns are rooted in the "real," "historical," and "scientific" but dismiss efficacy to speculate about how (and if?) camouflage can be used as a personal tool for bodied agency. It's a part of a magical, material, and metaphorical costume that I'm building for myself, as a queer, femme body that lives and moves within a large city. I imagine camouflage as a conceptual and literal technology to hide, obscure, and misrecognize my body in public and corporate space.</p>
+        <!-- TODO: Add description of onion service piece. -->
+        <div class="img-container">
+          <div class="img-wrapper too-long">
+            <img class="img-self too-long" src="img/software/subway-noise-camouflage.png" />
+            <figcaption>A screenshot of a multiscale pattern generated from a photograph of an empty subway car in New York City</figcaption>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-20">
+      <div class="col-xs-12">
+        <h2 id="mime-tool">MIME</h2>
+        <p>An easy-to-use, minimalist wireframing tool powered by machine learning.</p>
+        <p><a class="plain rainbow" href="https://youtu.be/HG2ZZigbxG0?t=33">Watch a demo</a> || <a class="plain rainbow" href="https://github.com/mime-dream-team">View code base</a></p>
+        <p>As you sketch, Mime transforms your hand-drawn circles and rectangles into clean shapes in real-time. It's powered by a custom-built TensorFlow.js (TF) model that we trained to recognize basic shapes using strokes drawn on an HTML canvas. The front-end workspace relies on React-Konva.js to create moveable, transformable shapes, Socket.io to communicate with the TF model, and React/Redux to manage wireframe rendering and updates. Each wireframe is automatically saved to a PostgreSQL database and accessible through a unique URL.</p>
+        <p>Built in collaboration with <a class="plain rainbow" href="https://github.com/cofuente">Chiara Marcial Martínez</a> and <a class="plain rainbow" href="https://github.com/ivanfex">Ivan Felix</a>.</p>
+        <p>Note: Mime's deployment is a little delayed as we work through an issue with the TensorFlow team. View the demo to get a full walkthrough of the application.</p>
+        <div class="img-container">
+          <div class="img-wrapper too-long">
+            <img class="img-self too-long" src="img/software/mime-wikipedia.gif" />
+            <figcaption>A speedy wireframe of Wikipedia using Mime's drawing canvas with resizable, draggable shapes</figcaption>
+          </div>
+        </div>
+        <div class="ptb-15 col-md-8">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/HG2ZZigbxG0?rel=0&amp;showinfo=0&amp;start=33&amp;color=white&amp;modestbranding=1&amp;cc_load_policy=1" frameborder="0" allow="autoplay; encrypted-media" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+            <figcaption>A video walkthrough of Mime and the technology behind the app</figcaption>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-20">
+      <div class="col-xs-12">
+        <h2>MIRROR, MIRROR</h2>
+        <p>A playful, responsive interface that continuously changes when it detects your face, mouth, and eyes.</p>
+        <p><a class="plain rainbow" href="https://mirror-mirror.lizz.website">Look into the Mirror</a> || <a class="plain rainbow" href="https://github.com/lizzthabet/mirror-mirror">View source code</a></p>
+        <p>Mirror, mirror uses trackingjs, p5js, and React to build an interactive UI that changes depending on how you look at it. It's an experiment in the performance of looking at an interface looking back at you. Built during a four-day hackathon.</p>
+        <div class="img-container">
+          <div class="img-wrapper-sm">
+            <img class="img-self" src="img/software/mirror-mirror.jpg" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-20">
+      <div class="col-xs-12">
+        <h2>DIRECTORY</h2>
+        <p>An experimental linked list.</p>
+        <p><a class="plain rainbow" href="https://lizzthabet.github.io/directory/">View the Directory</a></p>
+        <p>Directory is an experimental resource list that gathers lectures, meetups, groups, zines, books, videos, pdfs, and people who engage with technology, art, activism, movement, networks, and theory in overlapping and myriad ways. It started out as my own mental mind map because I found I was often sharing resources with people across disciplines. Directory uses a simple framework called <a href="http://thisisourwork.net/binder/#About" class="plain rainbow">Binder</a> to leverage the power of Google Docs for collaboration. Contribute by adding links and descriptions.</p>
+        <div class="img-container">
+          <div class="img-wrapper-sm">
+            <img class="img-self" src="img/software/directory.jpg" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
+    <footer class="container">
+      <div class="row">
+        <div class="col-xs-12">
+        <nav class="bottom"><a href="/">HOME</a> <a href="#top" class="pl-35">BACK TO TOP</a></nav>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

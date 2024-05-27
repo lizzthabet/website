@@ -9,7 +9,7 @@
     <!-- WELCOME TO MY WEB-O-SITE -->
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-grid.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="css/styles.css" rel="stylesheet">
@@ -26,45 +26,73 @@
   </head>
   <body class="nudge">
 
-  <div class="container header">
+  <header class="container header">
     <nav class="col-xs-12">
-          <a href="/"><img src="img/lizzthabet.svg" class="header-img" /></a>
+      <a aria-label="home" href="/"><img src="img/lizzthabet.svg" class="header-img" alt="the text 'lizz thabet' handwritten in all-caps" /></a>
     </nav>
-  </div>
+  </header>
 
-  <div class="container">
+  <main class="container">
     <div class="row">
       <div class="col-xs-12">
-        <ul>
-          <li>
-            <h1><a href="/i-am-hiding">I AM HIDING ALL YEAR ROUND</h1><img class="icon" src="img/icons/suit.png" />
+        <ul aria-label="a few projects here n there">
+          <li class="h1 list-link">
+            <a href="https://welcometomyhomepage.net" target="_blank">MEET ME ON THE DEEP NET</a>
+            <!-- <img class="icon" src="img/icons/suit.png" /> -->
           </li>
-          <li>
-            <h1><a href="/rager">DONE FEELIN</h1><img class="icon" src="img/icons/done-feelin.png" />
+          <li class="h1 list-link">
+            <a href="https://makeyour.computer/a-home" target="_blank">MAKE YOUR COMPUTER A HOME THAT YOUR FRIENDS CAN VISIT</a>
+            <!-- <img class="icon" src="img/icons/suit.png" /> -->
           </li>
-          <li>
-            <h1><a href="/software" class="rainbow">SOFTWARE</h1><img class="icon" src="img/icons/software.gif" />
+          <li class="h1 list-link">
+            <button>
+              <a href="https://sketches.lizz.website">HTML SKETCHES</a>
+            </button>
+            <!-- <img class="icon" src="img/icons/suit.png" /> -->
           </li>
-          <li>
-            <h1><a href="/dies-alone">DIES ALONE</a></h1><img class="icon" src="img/icons/dies-alone-icon.gif" />
+          <li class="h1 list-link">
+            <a href="/i-am-hiding">STUDIES IN DISAPPEARING</a>
+            <img class="icon" src="img/icons/suit.png" />
           </li>
-          <li>
-            <h1><a href="/drawings">DRAWINGS</a></h1><img class="icon" src="img/icons/drawing.png" />
+          <li class="h1 list-link">
+            <a href="/rager">DONE FEELIN</a>
+            <img class="icon" src="img/icons/done-feelin.png" />
           </li>
-          <li>
-            <h1><a href="/publications">BOOKS &amp; ZINES</a></h1><img class="icon" src="img/icons/books.png" />
+          <li class="h1 list-link">
+            <a href="/software" class="rainbow">SOFTWARE</a>
+            <img class="icon" src="img/icons/software.gif" />
           </li>
-          <li>
-            <h1><a href="/the-character">THE CHARACTER</a></h1><img class="icon" src="img/icons/the-character.gif" />
+          <li class="list-link">
+            <details>
+              <summary class="list-link-expansion">
+                MORE
+              </summary>
+              <li class="h1 list-link">
+                <a href="/dies-alone">DIES ALONE</a>
+                <img class="icon" src="img/icons/dies-alone-icon.gif" />
+              </li>
+              <li class="h1 list-link">
+                <a href="/drawings">DRAWINGS</a>
+                <img class="icon" src="img/icons/drawing.png" />
+              </li>
+              <li class="h1 list-link">
+                <a href="/publications">BOOKS &amp; ZINES</a>
+                <img class="icon" src="img/icons/books.png" />
+              </li>
+              <li class="h1 list-link">
+                <a href="/the-character">THE CHARACTER</a>
+                <img class="icon" src="img/icons/the-character.gif" />
+              </li>
+            </details>
           </li>
-          <li>
-            <h1><a href="/about">ABOUT</a></h1>
+          <li class="h1 list-link">
+            <a href="/about">ABOUT</a>
           </li>
          </ul>
          <small>*This website is always under construction. Pls excuse the mess.</small>
       </div>
     </div>
-  </div>
+  </main>
 
   </body>
 </html>
