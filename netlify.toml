@@ -1,6 +1,6 @@
 [build]
   base = "/"
-  publish = "src/"
+  publish = "public/"
 
 [functions]
   directory = "functions/"
