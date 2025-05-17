@@ -119,6 +119,13 @@ html, body {
 	width: 200px;
 }
 
+.header-paragraph {
+	font-size: 1.25rem;
+	margin-bottom: 1rem;
+	margin-top: 3rem;
+	max-width: 600px;
+}
+
 nav.bottom {
 	margin: 60px 0 40px 0;
 }
@@ -142,6 +149,11 @@ a.plain, a.plain:hover, .plain {
 
 a.plainer, a.plainer:hover, .plainer {
 	color: inherit;
+}
+
+a.underline {
+	text-decoration: underline;
+	text-underline-offset: 4px;
 }
 
 a.rainbow:hover {
@@ -217,6 +229,10 @@ hr {
 	border-top: 1px solid #a9a9a9;
 }
 
+hr.full-width {
+	width: 100%;
+}
+
 summary {
 	cursor: pointer;
 	/* Reset normalize.less */
@@ -264,14 +280,36 @@ figcaption {
 }
 
 .list-link-title {
-	color: blue;
-	font-size: 1.25em;
-	/* approximated 75px height */
-	padding: calc(48px / 2) 0; 
+	/* color: blue; */
+	font-size: 1.25rem;
+	
+	/* to prevent clickable area stretching across the whole screen */
+	width: fit-content;
 }
 
-.list-link-expansion {
-	margin-bottom: 0;
+/* .list-link-title::marker {
+	color: purple;
+} */
+
+.list-link-title.with-padding{
+	/* approximated 75px height */
+	padding: calc(48px / 2) 0;
+}
+
+/* Wrap the `summary` content in
+a nested element to avoid losing marker */
+.summary-wrapper {
+	display: inline-flex;
+	align-items: center;
+}
+
+.link-list-details-text {
+	font-size: 1rem;
+	max-width: 550px;
+}
+
+.arrow-link {
+	font-size: 1.75rem;
 }
 
 /*POEM HELPERS*/
